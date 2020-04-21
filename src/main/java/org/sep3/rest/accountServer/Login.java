@@ -23,8 +23,4 @@ import javax.ws.rs.core.MediaType;
            return accountsManager.checkIfExists(dto.getUsername(),dto.getPassword());
         }
 
-
-
-
-
 }
