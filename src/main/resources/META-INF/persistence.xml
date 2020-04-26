@@ -9,10 +9,10 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 <!--        <exclude-unlisted-classes>false</exclude-unlisted-classes>-->
 
-        <class>org.sep3.model.User</class>
-        <class>org.sep3.model.Job</class>
-        <class>org.sep3.model.Apply</class>
-        <class>org.sep3.model.Notify</class>
+        <class>org.rest.model.User</class>
+        <class>org.rest.model.Job</class>
+        <class>org.rest.model.Apply</class>
+        <class>org.rest.model.Notify</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" /> <!-- DB Driver -->

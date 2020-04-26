@@ -1,12 +1,6 @@
-import org.hibernate.HibernateException;
-import org.hibernate.Metamodel;
-import org.hibernate.query.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.sep3.model.Apply;
-import org.sep3.model.Job;
-import org.sep3.model.User;
+import org.rest.model.Apply;
+import org.rest.model.Job;
+import org.rest.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,11 +9,8 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import javax.persistence.metamodel.EntityType;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 public class Main {
@@ -43,8 +34,8 @@ public class Main {
     public static void main(final String[] args) throws Exception {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("vikarDefault");
 
-        User u = new User(UUID.randomUUID().toString(),
-                UUID.randomUUID().toString(),
+        User u = new User("java",
+                "123",
                 UUID.randomUUID().toString(),
                 UUID.randomUUID().toString(),
                 UUID.randomUUID().toString(),

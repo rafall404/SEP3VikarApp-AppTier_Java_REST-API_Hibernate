@@ -1,4 +1,4 @@
-package org.sep3.model;
+package org.rest.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

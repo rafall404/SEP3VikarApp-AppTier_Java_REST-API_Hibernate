@@ -1,6 +1,5 @@
-package org.sep3.rest.accountServer;
+package org.rest.service.accountServer;
 
-import code.accountsManager.AccountManager;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class LoginDTO {
