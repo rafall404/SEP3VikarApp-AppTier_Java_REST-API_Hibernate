@@ -1,5 +1,6 @@
 package org.dbAccess.dbHandlers;
 
+import org.rest.model.Job;
 import org.rest.model.User;
 
 import javax.persistence.EntityManager;
