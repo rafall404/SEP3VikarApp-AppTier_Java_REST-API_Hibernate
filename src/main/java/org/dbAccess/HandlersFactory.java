@@ -1,6 +1,7 @@
 package org.dbAccess;
 
 import org.dbAccess.dbHandlers.LogInDbHandler;
+import org.dbAccess.dbHandlers.RegisterDbHandler;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -30,6 +31,10 @@ public class HandlersFactory {
 
     public LogInDbHandler getLogInDb(){
         return new LogInDbHandler(factory);
+    }
+
+    public RegisterDbHandler getRegisterDb(){
+        return new RegisterDbHandler(factory);
     }
 
 

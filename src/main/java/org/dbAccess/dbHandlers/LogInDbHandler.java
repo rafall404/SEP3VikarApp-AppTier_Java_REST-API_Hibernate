@@ -29,6 +29,7 @@ public class LogInDbHandler {
 
             User res = manager.createQuery(cq).getSingleResult();
             System.out.println(res);
+
         }  catch(NoResultException e){
             return false;
         }

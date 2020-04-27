@@ -17,8 +17,8 @@
         <properties>
             <property name="javax5.persistence.jdbc.driver" value="org.postgresql.Driver" /> <!-- DB Driver -->
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/vikar" /> <!-- BD Mane -->
-            <property name="javax.persistence.jdbc.user" value="" /> <!-- DB User -->
-            <property name="javax.persistence.jdbc.password" value="" /> <!-- DB Password -->
+            <property name="javax.persistence.jdbc.user" value="postgres" /> <!-- DB User -->
+            <property name="javax.persistence.jdbc.password" value="qwerty" /> <!-- DB Password -->
 
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/> <!-- DB Dialect -->
             <property name="hibernate.hbm2ddl.auto" value="update" /> <!-- create / create-drop / update -->

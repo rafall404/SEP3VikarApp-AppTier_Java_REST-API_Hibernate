@@ -3,14 +3,11 @@ package org.rest.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
-
 @Data
 @NoArgsConstructor
-@RequiredArgsConstructor
 @Entity
 @Table(name="\"user\"")
 public class User {
@@ -29,6 +26,17 @@ public class User {
 	@NonNull private String emailAddress;
 
 	@NonNull private String telephoneNumber;
+
+
+
+	public User(String username, String password, String fname, String lname, String emailAddress, String telephoneNumber) {
+		this.username = username;
+		this.password = password;
+		this.fname = fname;
+		this.lname = lname;
+		this.emailAddress = emailAddress;
+		this.telephoneNumber = telephoneNumber;
+	}
 
 	@OneToMany
 	private List<Job> postedJobs;
