@@ -1,4 +1,4 @@
-package org.rest.service.accountServer;
+package org.rest.service.accountServer.login;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -1,12 +1,14 @@
-package org.rest.service.accountServer;
+package org.rest.service.accountServer.register;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class RegisterDTO {
     @JsonProperty("username")
-    private String userName;
+    private String username;
 
     @JsonProperty("password")
     private String password;
@@ -15,22 +17,25 @@ public class RegisterDTO {
     private String email;
 
     @JsonProperty("firstName")
-    private String fName;
+    private String firstName;
 
     @JsonProperty("lastName")
-    private String lName;
+    private String lastName;
 
     @JsonProperty("phone")
     private String phone;
 
+    @JsonProperty("birthDate")
+    private Date birthDate;
+
     public RegisterDTO(){}
 
     public RegisterDTO(String userName, String password, String email, String fName, String lName, String phone) {
-        this.userName = userName;
+        this.username = userName;
         this.password = password;
         this.email = email;
-        this.fName = fName;
-        this.lName = lName;
+        this.firstName = fName;
+        this.lastName = lName;
         this.phone = phone;
     }
 }

@@ -1,4 +1,4 @@
-package org.rest.service.accountServer;
+package org.rest.service.accountServer.register;
 
 import org.dbAccess.HandlersFactory;
 import org.dbAccess.dbHandlers.RegisterDbHandler;
@@ -11,15 +11,18 @@ public class Register {
 
     private RegisterDbHandler registerDb;
     public Register() {
-        registerDb = (RegisterDbHandler) HandlersFactory.getInstance().getRegisterDb();
+        registerDb = HandlersFactory.getInstance().getRegisterDb();
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void register(RegisterDTO rDTO){
-        User newUser = new User(rDTO.getUserName(), rDTO.getPassword(), rDTO.getFName(), rDTO.getLName(),
-                            rDTO.getEmail(), rDTO.getPhone());
 
+        System.out.println("Before wrapping into User "+rDTO.toString());
+
+        User newUser = new User(rDTO.getUsername(), rDTO.getPassword(), rDTO.getFirstName(), rDTO.getLastName(),
+                            rDTO.getEmail(), rDTO.getPhone());
+        System.out.println("After wrapping into User "+newUser.toString());
         registerDb.addNewAccount(newUser);
     }
 

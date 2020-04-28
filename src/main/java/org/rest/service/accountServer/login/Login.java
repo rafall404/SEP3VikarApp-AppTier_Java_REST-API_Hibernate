@@ -1,6 +1,7 @@
-package org.rest.service.accountServer;
+package org.rest.service.accountServer.login;
 
 import org.dbAccess.HandlersFactory;
+import org.dbAccess.dbHandlers.LogInDbHandler;
 import org.rest.model.User;
 
 import javax.ws.rs.*;
@@ -10,9 +11,9 @@ import javax.ws.rs.core.MediaType;
     @Path("account/login/" )
     public class Login {
 
-        private HandlersFactory factory;
+        private LogInDbHandler logInDb;
         public Login() {
-            factory= HandlersFactory.getInstance();
+            logInDb = HandlersFactory.getInstance().getLogInDb();
         }
 
        @POST
@@ -23,7 +24,7 @@ import javax.ws.rs.core.MediaType;
             User u = new User();
             u.setUsername(dto.getUsername());
             u.setPassword(dto.getPassword());
-           return factory.getLogInDb().checkIfExists(u);
+           return logInDb.checkIfExists(u);
         }
 
 }
