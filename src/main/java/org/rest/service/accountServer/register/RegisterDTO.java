@@ -13,6 +13,9 @@ public class RegisterDTO {
     @JsonProperty("password")
     private String password;
 
+    @JsonProperty("repeatedPassword")
+    private String repeatedPassword;
+
     @JsonProperty("email")
     private String email;
 
@@ -30,12 +33,5 @@ public class RegisterDTO {
 
     public RegisterDTO(){}
 
-    public RegisterDTO(String userName, String password, String email, String fName, String lName, String phone) {
-        this.username = userName;
-        this.password = password;
-        this.email = email;
-        this.firstName = fName;
-        this.lastName = lName;
-        this.phone = phone;
-    }
+
 }
