@@ -4,5 +4,4 @@
 out
 target
 *.class
-*.iml
-META-INF
+src/main/resources/META-INF
