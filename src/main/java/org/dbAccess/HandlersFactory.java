@@ -1,5 +1,6 @@
 package org.dbAccess;
 
+import org.dbAccess.dbHandlers.JobDbHandler;
 import org.dbAccess.dbHandlers.LogInDbHandler;
 import org.dbAccess.dbHandlers.RegisterDbHandler;
 
@@ -36,6 +37,12 @@ public class HandlersFactory {
     public RegisterDbHandler getRegisterDb(){
         return new RegisterDbHandler(factory);
     }
+
+    public JobDbHandler getJobDb()
+    {
+        return new JobDbHandler(factory);
+    }
+
 
 
 }
