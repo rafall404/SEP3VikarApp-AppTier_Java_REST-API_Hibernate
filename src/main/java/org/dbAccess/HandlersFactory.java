@@ -1,10 +1,8 @@
 package org.dbAccess;
 
+import org.dbAccess.dbHandlers.AccountDbHandler;
 import org.dbAccess.dbHandlers.JobDbHandler;
-import org.dbAccess.dbHandlers.LogInDbHandler;
-import org.dbAccess.dbHandlers.RegisterDbHandler;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.concurrent.locks.Lock;
@@ -30,12 +28,10 @@ public class HandlersFactory {
         return handlersFactory;
     }
 
-    public LogInDbHandler getLogInDb(){
-        return new LogInDbHandler(factory);
-    }
 
-    public RegisterDbHandler getRegisterDb(){
-        return new RegisterDbHandler(factory);
+
+    public AccountDbHandler getAccountDb() {
+        return new AccountDbHandler(factory);
     }
 
     public JobDbHandler getJobDb()

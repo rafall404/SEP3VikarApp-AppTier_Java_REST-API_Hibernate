@@ -24,4 +24,7 @@ public class JobDTO {
     @JsonProperty("dateTime")
     private LocalDate dateTime;
 
+    @JsonProperty("username")
+    private String username;
+
 }

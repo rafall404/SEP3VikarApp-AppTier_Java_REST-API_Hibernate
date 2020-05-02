@@ -1,6 +1,7 @@
 package org.dbAccess.dbHandlers;
 
 import org.rest.model.Job;
+import org.rest.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -17,12 +18,20 @@ public class JobDbHandler {
         manager =  factory.createEntityManager();
     }
 
-    public void createJob(Job job)
+    public void createJob(Job job,String username)
     {
         Job j = job;
+        CriteriaBuilder cb = manager.getCriteriaBuilder();
+        CriteriaQuery<User> cq = cb.createQuery(User.class);
+        Root<User> root = cq.from(User.class);
+        cq.select(root).where(cb.and(cb.equal(root.get("username"), username)));
+        User res = manager.createQuery(cq).getSingleResult();
+        res.addJob(j);
         manager.getTransaction().begin();
+        manager.persist(res);
         manager.persist(j);
         manager.getTransaction().commit();
+        manager.close();
     }
 
 }

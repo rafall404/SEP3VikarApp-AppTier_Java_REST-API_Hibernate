@@ -4,12 +4,11 @@ import org.dbAccess.HandlersFactory;
 import org.dbAccess.dbHandlers.JobDbHandler;
 import org.rest.model.Job;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 @Path("job")
 public class JobManager {
@@ -25,11 +24,14 @@ public class JobManager {
     @POST
     @Path("/create")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_PLAIN)
     public Boolean createJob(JobDTO dto)
     {
-        try {
+        if(dto.getTitle()==null || dto.getDateTime()==null || dto.getLocation() ==null || dto.getPrice()<=0 || dto.getUsername()==null) {
+           return false;
+        }
+
             System.out.println("Job is about to be created with " + dto.getTitle());
+            System.out.println("###############################" + dto.getUsername());
 
             Job job = new Job();
             job.setTitle(dto.getTitle());
@@ -38,12 +40,11 @@ public class JobManager {
             job.setDescription(dto.getDescription());
             job.setLocation(dto.getLocation());
             job.setStatus("Available");
-            jobDBHandler.createJob(job);
-        }catch (NullPointerException e)
-        {
-            return false;
-        }
+            jobDBHandler.createJob(job,dto.getUsername());
+
         return true;
 
     }
+
+
 }
