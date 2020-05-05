@@ -38,25 +38,29 @@ public class Main {
 
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("vikarDefault");
 
-        User u = new User("java",
-                "123",
-                UUID.randomUUID().toString(),
-                UUID.randomUUID().toString(),
-                UUID.randomUUID().toString(),
-                UUID.randomUUID().toString());
-
-//        Job j = new Job(UUID.randomUUID().toString(),
+//        User u = new User("java",
+//                "123",
 //                UUID.randomUUID().toString(),
 //                UUID.randomUUID().toString(),
 //                UUID.randomUUID().toString(),
-//                LocalDate.now());
-//        j.setPrice(42);
+//                UUID.randomUUID().toString());
+        EntityManager em = factory.createEntityManager();
 //
-       EntityManager em = factory.createEntityManager();
-        em.getTransaction().begin();
-        em.persist(u);
-//        em.persist(j);
-        em.getTransaction().commit();
+//        for (int i =0; i<10; i++) {
+//            Job j = new Job(UUID.randomUUID().toString(),
+//                    UUID.randomUUID().toString(),
+//                    UUID.randomUUID().toString(),
+//                    "Horsens",
+//                    LocalDate.now());
+//            j.setPrice(42);
+//            em.getTransaction().begin();
+//
+//            em.persist(j);
+//            em.getTransaction().commit();
+//
+//        }
+
+//        em.persist(u);
 
 
 //        Apply apply = new Apply(u.getId(), j.getId(), false);

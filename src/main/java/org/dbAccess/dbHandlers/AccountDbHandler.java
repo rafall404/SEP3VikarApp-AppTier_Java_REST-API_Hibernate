@@ -2,10 +2,7 @@ package org.dbAccess.dbHandlers;
 
 import org.rest.model.*;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,20 +61,23 @@ public class AccountDbHandler {
         manager.close();
     }
 
-    public List<Job> getUserJobs(Long id)
+    public List<Job> getUserJobs(Long userId,Long Jobid)
     {
-        try {
-            CriteriaBuilder cb = manager.getCriteriaBuilder();
-            CriteriaQuery<User> cq = cb.createQuery(User.class);
-            Root<User> root = cq.from(User.class);
-            cq.select(root).where(cb.equal(root.get("id"), id));
+        List<Job> jobs;
 
-            User u = manager.createQuery(cq).getSingleResult();
-            return u.getPostedJobs();
-        }catch (NoResultException e)
-        {
-            return null;
-        }
+        CriteriaBuilder cb = manager.getCriteriaBuilder();
+        CriteriaQuery<Job> cq = cb.createQuery(Job.class);
+        Root<User> root = cq.from(User.class);
+
+        String queryString = "Select u.postedJobs from User u where u.id = :userId";
+        Query query = manager.createQuery(queryString);
+        query.setParameter("userId", userId);
+        query.setParameter("Jobid", Jobid);
+
+        query.setMaxResults(8);
+
+        jobs = query.getResultList();
+        return jobs;
 
 
     }

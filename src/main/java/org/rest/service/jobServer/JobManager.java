@@ -9,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 @Path("job")
 public class JobManager {
@@ -44,6 +45,12 @@ public class JobManager {
 
         return true;
 
+    }
+
+    @GET
+    @Path("/getJobs")
+    public List<Job> getJobs(@QueryParam("location") String location, @QueryParam("id") Long id){
+        return jobDBHandler.findJobs(location,id);
     }
 
 
