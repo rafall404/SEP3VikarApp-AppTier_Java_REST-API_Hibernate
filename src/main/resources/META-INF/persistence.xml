@@ -14,9 +14,10 @@
         <class>org.rest.model.Apply</class>
         <class>org.rest.model.Notify</class>
 
+
         <properties>
-            <property name="javax5.persistence.jdbc.driver" value="org.postgresql.Driver" /> <!-- DB Driver -->
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/vikar" /> <!-- BD Mane -->
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" /> <!-- DB Driver -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/vikar" /> <!-- BD Mane -->
             <property name="javax.persistence.jdbc.user" value="postgres" /> <!-- DB User -->
             <property name="javax.persistence.jdbc.password" value="qwerty" /> <!-- DB Password -->
 

@@ -11,6 +11,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class Main {
@@ -32,51 +34,59 @@ public class Main {
 //    }
 
     public static void main(final String[] args) throws Exception {
+
+
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("vikarDefault");
 
-        User u = new User("java",
-                "123",
-                UUID.randomUUID().toString(),
-                UUID.randomUUID().toString(),
-                UUID.randomUUID().toString(),
-                UUID.randomUUID().toString());
+//        User u = new User("java",
+//                "123",
+//                UUID.randomUUID().toString(),
+//                UUID.randomUUID().toString(),
+//                UUID.randomUUID().toString(),
+//                UUID.randomUUID().toString());
+//
+//        Job j = new Job(UUID.randomUUID().toString(),
+//                UUID.randomUUID().toString(),
+//                UUID.randomUUID().toString(),
+//                UUID.randomUUID().toString(),
+//                LocalDate.now());
+//        j.setPrice(42);
+//
+       EntityManager em = factory.createEntityManager();
+//        em.getTransaction().begin();
+//        em.persist(u);
+//        em.persist(j);
+//        em.getTransaction().commit();
 
-        Job j = new Job(UUID.randomUUID().toString(),
-                UUID.randomUUID().toString(),
-                UUID.randomUUID().toString(),
-                UUID.randomUUID().toString(),
-                LocalDate.now());
-        j.setPrice(42);
 
-        EntityManager em = factory.createEntityManager();
-        em.getTransaction().begin();
-        em.persist(u);
-        em.persist(j);
-        em.getTransaction().commit();
+//        Apply apply = new Apply(u.getId(), j.getId(), false);
+//
+//        em.getTransaction().begin();
+//        em.persist(apply);
+//        em.getTransaction().commit();
+//
+//        User u2 = em.find(User.class, u.getId());
+//        System.out.println(u);
+//        System.out.println(u2);
+//
+//        CriteriaBuilder cb = em.getCriteriaBuilder();
+//        CriteriaQuery<User> cq = cb.createQuery(User.class);
+//        Root<User> root = cq.from(User.class);
+//        cq.select(root).where(cb.equal(root.get("fname"), u.getFname()));
+//        User res = em.createQuery(cq).getSingleResult();
+//        System.out.println("####################################################################");
+//        System.out.println(res);
+//
+//        TypedQuery<User> q = em.createQuery("SELECT u FROM User u WHERE u.fname = :fname", User.class);
+//        User u3 = q.setParameter("fname", u.getFname()).getSingleResult();
+//        System.out.println(u3);
 
-
-        Apply apply = new Apply(u.getId(), j.getId(), false);
-
-        em.getTransaction().begin();
-        em.persist(apply);
-        em.getTransaction().commit();
-
-        User u2 = em.find(User.class, u.getId());
-        System.out.println(u);
-        System.out.println(u2);
-
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<User> cq = cb.createQuery(User.class);
-        Root<User> root = cq.from(User.class);
-        cq.select(root).where(cb.equal(root.get("fname"), u.getFname()));
-        User res = em.createQuery(cq).getSingleResult();
-        System.out.println("####################################################################");
-        System.out.println(res);
-
-        TypedQuery<User> q = em.createQuery("SELECT u FROM User u WHERE u.fname = :fname", User.class);
-        User u3 = q.setParameter("fname", u.getFname()).getSingleResult();
-        System.out.println(u3);
-
+        TypedQuery<User> q = em.createQuery("SELECT u from User u where username = 'java'", User.class);
+        List<User> result = q.getResultList();
+        for(int i=0;i<result.size();i++)
+        {
+            System.out.println(result.get(i).getPostedJobs().get(1) + "###################");
+        }
         em.close();
 
         factory.close();

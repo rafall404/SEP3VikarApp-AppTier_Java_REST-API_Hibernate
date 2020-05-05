@@ -5,3 +5,4 @@ out
 target
 *.class
 src/main/resources/META-INF
+BusinessLogicProofOfConcept.iml
