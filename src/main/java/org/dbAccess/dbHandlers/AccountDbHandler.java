@@ -63,20 +63,19 @@ public class AccountDbHandler {
 
     public List<Job> getUserJobs(Long userId,Long Jobid)
     {
-       List<Job> jobs;
+       List<Job> jobs= new ArrayList<>();
 //
 //        CriteriaBuilder cb = manager.getCriteriaBuilder();
 //        CriteriaQuery<Job> cq = cb.createQuery(Job.class);
 //        Root<User> root = cq.from(User.class);
 
-        String queryString = "Select u.postedJobs from User u INNER JOIN Job j where u.id = :userId and j.id > :Jobid";
+        String queryString = "Select u.postedJobs from User u where u.id = :userId";
         Query query = manager.createQuery(queryString);
         query.setParameter("userId", userId);
-        query.setParameter("Jobid", Jobid);
 
         query.setMaxResults(8);
+        jobs = query.getResultList().subList(Jobid.intValue(),Jobid.intValue() + 8);
 
-        jobs = query.getResultList();
         return jobs;
 
 
