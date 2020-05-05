@@ -25,7 +25,7 @@ public class Account {
     @POST
     @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
-    public User login(AccountDTO dto)
+    public Boolean login(AccountDTO dto)
     {
         System.out.println("Username: " + dto.getUsername() + "Password : " + dto.getPassword());
         User u = new User();
@@ -34,6 +34,21 @@ public class Account {
 
 
         return accountDb.checkIfExists(u);
+
+    }
+
+    @GET
+    @Path("/getAccount")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public User getAccount(AccountDTO dto)
+    {
+        System.out.println("Username: " + dto.getUsername() + "Password : " + dto.getPassword());
+        User u = new User();
+        u.setUsername(dto.getUsername());
+        u.setPassword(dto.getPassword());
+
+
+        return accountDb.getUser(u);
 
     }
 

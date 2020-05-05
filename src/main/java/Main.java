@@ -38,13 +38,13 @@ public class Main {
 
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("vikarDefault");
 
-//        User u = new User("java",
-//                "123",
-//                UUID.randomUUID().toString(),
-//                UUID.randomUUID().toString(),
-//                UUID.randomUUID().toString(),
-//                UUID.randomUUID().toString());
-//
+        User u = new User("java",
+                "123",
+                UUID.randomUUID().toString(),
+                UUID.randomUUID().toString(),
+                UUID.randomUUID().toString(),
+                UUID.randomUUID().toString());
+
 //        Job j = new Job(UUID.randomUUID().toString(),
 //                UUID.randomUUID().toString(),
 //                UUID.randomUUID().toString(),
@@ -53,10 +53,10 @@ public class Main {
 //        j.setPrice(42);
 //
        EntityManager em = factory.createEntityManager();
-//        em.getTransaction().begin();
-//        em.persist(u);
+        em.getTransaction().begin();
+        em.persist(u);
 //        em.persist(j);
-//        em.getTransaction().commit();
+        em.getTransaction().commit();
 
 
 //        Apply apply = new Apply(u.getId(), j.getId(), false);
@@ -81,12 +81,12 @@ public class Main {
 //        User u3 = q.setParameter("fname", u.getFname()).getSingleResult();
 //        System.out.println(u3);
 
-        TypedQuery<User> q = em.createQuery("SELECT u from User u where username = 'java'", User.class);
-        List<User> result = q.getResultList();
-        for(int i=0;i<result.size();i++)
-        {
-            System.out.println(result.get(i).getPostedJobs().get(1) + "###################");
-        }
+//        TypedQuery<User> q = em.createQuery("SELECT u from User u where username = 'java'", User.class);
+//        List<User> result = q.getResultList();
+//        for(int i=0;i<result.size();i++)
+//        {
+//            System.out.println(result.get(i).getPostedJobs().get(1) + "###################");
+//        }
         em.close();
 
         factory.close();

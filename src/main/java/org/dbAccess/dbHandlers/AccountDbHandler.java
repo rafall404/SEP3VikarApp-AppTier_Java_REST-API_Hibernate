@@ -17,8 +17,8 @@ public class AccountDbHandler {
         manager =  factory.createEntityManager();
     }
 
-    public User checkIfExists(User user){
-        User res = null;
+    public Boolean checkIfExists(User user){
+
         try {
 
 
@@ -27,7 +27,27 @@ public class AccountDbHandler {
             Root<User> root = cq.from(User.class);
             cq.select(root).where(cb.and(cb.equal(root.get("username"), user.getUsername())),cb.equal(root.get("password"), user.getPassword()));
 
-            res = manager.createQuery(cq).getSingleResult();
+           User res = manager.createQuery(cq).getSingleResult();
+            System.out.println(res);
+            manager.close();
+
+        }  catch(NoResultException e){
+            return false;
+        }
+        return true;
+    }
+
+    public User getUser(User user){
+
+        User res;
+        try {
+
+            CriteriaBuilder cb = manager.getCriteriaBuilder();
+            CriteriaQuery<User> cq = cb.createQuery(User.class);
+            Root<User> root = cq.from(User.class);
+            cq.select(root).where(cb.and(cb.equal(root.get("username"), user.getUsername())),cb.equal(root.get("password"), user.getPassword()));
+
+             res = manager.createQuery(cq).getSingleResult();
             System.out.println(res);
             manager.close();
 
