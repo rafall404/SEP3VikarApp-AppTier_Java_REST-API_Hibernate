@@ -82,11 +82,11 @@ public class Account {
     @GET
     @Path("/UserJobs")
     @Consumes(MediaType.APPLICATION_JSON)
-    public List<Job> getAllUsersJobs(@QueryParam("id")Long id)
+    public List<Job> getAllUsersJobs(@QueryParam("idUser")Long id,@QueryParam("idJob")Long idJob )
     {
 
        System.out.println(id + "Id of sent user");
-       return accountDb.getUserJobs(id);
+       return accountDb.getUserJobs(id, idJob);
     }
 
 
