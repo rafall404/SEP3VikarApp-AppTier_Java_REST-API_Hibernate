@@ -49,7 +49,6 @@ public class Account {
 
 
         return accountDb.getUser(u);
-
     }
 
 
@@ -61,7 +60,7 @@ public class Account {
         System.out.println("Before wrapping into User "+rDTO.toString());
 
         if (!rDTO.getPassword().equals(rDTO.getRepeatedPassword())){
-            return false; // not sure it it works, next one too
+            return false;
         }
         LocalDate birthInLocalDate = rDTO.getBirthDate().toInstant()
                 .atZone(ZoneId.systemDefault())

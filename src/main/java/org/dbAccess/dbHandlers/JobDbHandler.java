@@ -40,7 +40,7 @@ public class JobDbHandler {
     }
 
     public List<Job> findJobs(String location, Long id){
-        List<Job> jobs = new ArrayList<>();
+        List<Job> jobs;
 
         CriteriaBuilder cb = manager.getCriteriaBuilder();
         CriteriaQuery<Job> cq = cb.createQuery(Job.class);
@@ -51,13 +51,10 @@ public class JobDbHandler {
         query.setParameter("location", location.toLowerCase());
         query.setParameter("id", id);
 
-
-
         query.setMaxResults(8);
 
-
-
         jobs = query.getResultList();
+        manager.close();
         return jobs;
     }
 

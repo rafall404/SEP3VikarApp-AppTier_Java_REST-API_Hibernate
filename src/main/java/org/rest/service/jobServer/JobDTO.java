@@ -8,6 +8,8 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 @Data
 public class JobDTO {
+    @JsonProperty("id")
+    private Long id;
 
     @JsonProperty("title")
     private String title;

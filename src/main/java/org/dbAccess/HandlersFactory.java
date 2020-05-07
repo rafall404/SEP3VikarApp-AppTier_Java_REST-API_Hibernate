@@ -1,6 +1,7 @@
 package org.dbAccess;
 
 import org.dbAccess.dbHandlers.AccountDbHandler;
+import org.dbAccess.dbHandlers.ApplyDbHandler;
 import org.dbAccess.dbHandlers.JobDbHandler;
 
 import javax.persistence.EntityManagerFactory;
@@ -39,6 +40,8 @@ public class HandlersFactory {
         return new JobDbHandler(factory);
     }
 
-
+    public ApplyDbHandler getApplyDb() {
+        return new ApplyDbHandler(factory);
+    }
 
 }

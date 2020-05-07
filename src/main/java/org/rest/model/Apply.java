@@ -19,4 +19,9 @@ public class Apply {
         id = new UserJobId(user, job);
         isAccepted = accepted;
     }
+
+    public Apply(UserJobId userJobId){
+        id=userJobId;
+        isAccepted= false;
+    }
 }
