@@ -59,25 +59,52 @@ public class AccountDbHandler {
         manager.persist(user);
         manager.getTransaction().commit();
         manager.close();
+
+
+
     }
 
     public List<Job> getUserJobs(Long userId,Long Jobid)
     {
        List<Job> jobs= new ArrayList<>();
+       List<Job> userJobs= new ArrayList<>();
 //
 //        CriteriaBuilder cb = manager.getCriteriaBuilder();
 //        CriteriaQuery<Job> cq = cb.createQuery(Job.class);
 //        Root<User> root = cq.from(User.class);
 
-        String queryString = "Select u.postedJobs from User u where u.id = :userId";
+
+        String queryString = "Select u.postedJobs  from User u where u.id = :userId ";
+
+
         Query query = manager.createQuery(queryString);
-        query.setParameter("userId", userId);
+       query.setParameter("userId", userId);
+        jobs = query.getResultList();
 
-        query.setMaxResults(8);
-        jobs = query.getResultList().subList(Jobid.intValue(),Jobid.intValue() + 8);
+        for(int i =0; i<jobs.size();i++)
+        {
+            if(jobs.get(i).getId()>Jobid)
+            {
+                userJobs.add(jobs.get(i));
+            }
+        }
+        int finish=8;
+        while(true) {
+            try {
+                userJobs = userJobs.subList(0, finish);
+            } catch (IndexOutOfBoundsException e) {
+                    finish = finish -1;
+            }
+            break;
+        }
 
-        return jobs;
 
+        return userJobs;
+
+
+
+
+//        Query query1 = manager.createNativeQuery("SELECT j from (SELECT u.postedJobs from user u where u.id = )");
 
     }
 

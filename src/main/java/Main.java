@@ -2,10 +2,7 @@ import org.rest.model.Apply;
 import org.rest.model.Job;
 import org.rest.model.User;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -45,6 +42,24 @@ public class Main {
 //                UUID.randomUUID().toString(),
 //                UUID.randomUUID().toString());
         EntityManager em = factory.createEntityManager();
+
+       Long userId = Long.valueOf(1);
+       Long Jobid = Long.valueOf(3);
+//        String queryString = "select j from Job j inner JOIN User_Job on j.id = user_job.postedjobs_id inner JOIN USER u on u.id = user_job.User_id where u.id =" + userId + "and  j.id = " + Jobid;
+//        String queryString = "SELECT j from (select u.getPostedJobs from USER u where u.id = " + userId + ") as j where j.id = " + Jobid;
+//            String queryString ="select u.postedJobs from User u where  u.postedJobs j where j.id  =:JobId and u.id = :userId";
+
+
+//        Query query = em.createQuery(queryString);
+//     query.setParameter("userId", userId);
+//      query.setParameter("Jobid",Jobid);
+//
+//        query.setMaxResults(8);
+//        List <Job>jobs = query.getResultList();
+//        for(int i = 0;i<jobs.size();i++)
+//        {
+//            System.out.println(jobs.get(i).getId());
+//        }
 //
 //        for (int i =0; i<10; i++) {
 //            Job j = new Job(UUID.randomUUID().toString(),

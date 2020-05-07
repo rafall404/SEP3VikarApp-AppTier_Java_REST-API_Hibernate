@@ -51,7 +51,11 @@ public class JobDbHandler {
         query.setParameter("location", location.toLowerCase());
         query.setParameter("id", id);
 
+
+
         query.setMaxResults(8);
+
+
 
         jobs = query.getResultList();
         return jobs;
