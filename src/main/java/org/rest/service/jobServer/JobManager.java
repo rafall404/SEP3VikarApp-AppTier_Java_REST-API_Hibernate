@@ -3,6 +3,8 @@ package org.rest.service.jobServer;
 import org.dbAccess.HandlersFactory;
 import org.dbAccess.dbHandlers.JobDbHandler;
 import org.rest.model.Job;
+import org.rest.model.User;
+import org.rest.service.jobServer.DTOs.GetApplicantsDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -50,6 +52,9 @@ public class JobManager {
         return jobDBHandler.findJobs(location,id);
     }
 
-
-
+    @GET
+    @Path("/getApplicants")
+    public List<User> getApplicatsForJob(GetApplicantsDTO dto){
+        return jobDBHandler.getApplicants(dto.getJobId());
+    }
 }

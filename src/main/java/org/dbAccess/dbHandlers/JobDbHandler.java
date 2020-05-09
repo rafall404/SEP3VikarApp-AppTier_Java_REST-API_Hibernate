@@ -1,5 +1,6 @@
 package org.dbAccess.dbHandlers;
 
+import org.rest.model.Apply;
 import org.rest.model.Job;
 import org.rest.model.Job_;
 import org.rest.model.User;
@@ -42,10 +43,6 @@ public class JobDbHandler {
     public List<Job> findJobs(String location, Long id){
         List<Job> jobs;
 
-        CriteriaBuilder cb = manager.getCriteriaBuilder();
-        CriteriaQuery<Job> cq = cb.createQuery(Job.class);
-        Root<Job> root = cq.from(Job.class);
-
         String queryString = "Select j from Job j where j.location = :location and j.id > :id ORDER BY j.id asc";
         Query query = manager.createQuery(queryString);
         query.setParameter("location", location.toLowerCase());
@@ -56,6 +53,18 @@ public class JobDbHandler {
         jobs = query.getResultList();
         manager.close();
         return jobs;
+    }
+
+    public List<User> getApplicants(Long jobId){
+        List<User> applicants;
+
+        String queryString = "Select u from User u join Apply a where a.id.jobId = :jobId";
+        Query query = manager.createQuery(queryString);
+        query.setParameter("jobId", jobId);
+
+        applicants = query.getResultList();
+        manager.close();
+        return applicants;
     }
 
 }

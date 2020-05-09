@@ -2,8 +2,7 @@ package org.rest.service.applyServer;
 
 import org.dbAccess.HandlersFactory;
 import org.dbAccess.dbHandlers.ApplyDbHandler;
-import org.rest.service.accountServer.AccountDTO;
-import org.rest.service.jobServer.JobDTO;
+import org.rest.service.applyServer.DTOs.ApplyDTO;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -22,4 +21,5 @@ public class Application {
     public Boolean applyFor(ApplyDTO applyDTO){
         return applyHandler.applyForJob(applyDTO.getUserId(), applyDTO.getUserId());
     }
+
 }
