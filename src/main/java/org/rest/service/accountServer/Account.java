@@ -58,7 +58,9 @@ public class Account {
     public Boolean register(AccountDTO rDTO){
 
         System.out.println("Before wrapping into User "+rDTO.toString());
-
+        if(accountDb.checkIfUsernameInUse(rDTO.getUsername())){
+            return false;
+        }
         if (!rDTO.getPassword().equals(rDTO.getRepeatedPassword())){
             return false;
         }

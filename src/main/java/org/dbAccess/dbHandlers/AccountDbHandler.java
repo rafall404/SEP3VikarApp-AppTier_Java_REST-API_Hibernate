@@ -33,6 +33,17 @@ public class AccountDbHandler {
         }
         return true;
     }
+    public boolean checkIfUsernameInUse(String userName){
+        String stringQuery = "Select u from User u where u.username = :username";
+        Query query = manager.createQuery(stringQuery);
+        query.setParameter("username", userName);
+        try{
+            User user = (User) query.getSingleResult();
+            return true;
+        }catch(NoResultException e){
+            return false;
+        }
+    }
 
     public User getUser(User user){
 
