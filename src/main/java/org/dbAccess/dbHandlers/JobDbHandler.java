@@ -1,10 +1,8 @@
 package org.dbAccess.dbHandlers;
 
-import org.rest.model.Apply;
-import org.rest.model.Job;
-import org.rest.model.Job_;
-import org.rest.model.User;
+import org.rest.model.*;
 
+import javax.jws.soap.SOAPBinding;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
@@ -65,6 +63,27 @@ public class JobDbHandler {
         applicants = query.getResultList();
         manager.close();
         return applicants;
+    }
+
+    public void acceptApplicants(Long jobId, List<Long> usersId){
+        ArrayList<User> acceptedApplicants = null;
+        String queryString = "Select a from User u join Apply a where a.id.jobId = :jobId and a.id.userId = :userId";
+        Query query = manager.createQuery(queryString);
+        query.setParameter("jobId", jobId);
+        for (int i = 0; i < usersId.size(); i++) {
+            query.setParameter("userId", usersId.get(i));
+            Apply application = (Apply) query.getSingleResult();
+            application.setAccepted(true);
+
+            UserJobId userJobId = new UserJobId(usersId.get(i), jobId);
+            Notify notification = new Notify(userJobId, "Accepted");
+
+            manager.getTransaction().begin();
+            manager.persist(application);
+            manager.persist(notification);
+            manager.getTransaction().commit();
+            manager.close();
+        }
     }
 
 }

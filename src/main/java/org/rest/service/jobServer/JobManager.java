@@ -4,6 +4,7 @@ import org.dbAccess.HandlersFactory;
 import org.dbAccess.dbHandlers.JobDbHandler;
 import org.rest.model.Job;
 import org.rest.model.User;
+import org.rest.service.jobServer.DTOs.AcceptApplicantsDTO;
 import org.rest.service.jobServer.DTOs.GetApplicantsDTO;
 
 import javax.ws.rs.*;
@@ -54,7 +55,14 @@ public class JobManager {
 
     @GET
     @Path("/getApplicants")
-    public List<User> getApplicatsForJob(GetApplicantsDTO dto){
+    public List<User> getApplicantsForJob(GetApplicantsDTO dto){
         return jobDBHandler.getApplicants(dto.getJobId());
     }
+
+    @POST
+    @Path("/acceptApplicants")
+    public void acceptApplicants(AcceptApplicantsDTO dto){
+        jobDBHandler.acceptApplicants(dto.getJobId(), dto.getUsersId());
+    }
+
 }
