@@ -30,6 +30,6 @@ public class Job {
 
 	private double price;
 
-	@NonNull private LocalDate dateTime;
+	@NonNull private LocalDate date;
 
 }
