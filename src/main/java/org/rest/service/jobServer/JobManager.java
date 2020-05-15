@@ -37,7 +37,7 @@ public class JobManager {
             Job job = new Job();
             job.setTitle(dto.getTitle());
             job.setPrice(dto.getPrice());
-            job.setDateTime(dto.getDateTime());
+            job.setDate(dto.getDateTime());
             job.setDescription(dto.getDescription());
             job.setLocation(dto.getLocation());
             job.setStatus("Available");
