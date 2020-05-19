@@ -1,4 +1,4 @@
-package org.rest.service.applyServer.DTOs;
+package org.rest.service.applyServer.apply;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
