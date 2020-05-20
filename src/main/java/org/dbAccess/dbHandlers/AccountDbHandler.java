@@ -1,6 +1,7 @@
 package org.dbAccess.dbHandlers;
 
 import org.rest.model.*;
+import org.rest.service.accountServer.userjobs.AccountDTO;
 
 import javax.persistence.*;
 import javax.persistence.criteria.*;
@@ -45,9 +46,10 @@ public class AccountDbHandler {
         }
     }
 
-    public User getUser(User user){
+    public AccountDTO getUser(User user){
 
         User res;
+        AccountDTO acc = new AccountDTO();
         try {
 
             CriteriaBuilder cb = manager.getCriteriaBuilder();
@@ -56,13 +58,21 @@ public class AccountDbHandler {
             cq.select(root).where(cb.and(cb.equal(root.get("username"), user.getUsername())),cb.equal(root.get("password"), user.getPassword()));
 
              res = manager.createQuery(cq).getSingleResult();
+             acc.setEmail(res.getEmailAddress());
+             acc.setFirstName(res.getFname());
+             acc.setUserId(res.getId());
+             acc.setLastName(res.getLname());
+             acc.setPassword(res.getPassword());
+             acc.setPhone(res.getTelephoneNumber());
+             acc.setUsername(res.getUsername());
+             acc.setPostedJobsNo(res.getPostedJobs().size());
             System.out.println(res);
             manager.close();
 
         }  catch(NoResultException e){
             return null;
         }
-        return res;
+        return acc;
     }
 
     public void addNewAccount(User user){

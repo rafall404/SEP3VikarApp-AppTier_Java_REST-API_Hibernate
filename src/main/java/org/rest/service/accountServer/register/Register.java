@@ -32,7 +32,7 @@ public class Register {
         if(accountDb.checkIfUsernameInUse(rDTO.getUsername())){
             return false;
         }
-        if (!rDTO.getPassword().equals(rDTO.getRepeatedPassword())){
+        if (!rDTO.getPassword().equals(rDTO.getRepeatPassword())){
             return false;
         }
         LocalDate birthInLocalDate = rDTO.getBirthDate().toInstant()

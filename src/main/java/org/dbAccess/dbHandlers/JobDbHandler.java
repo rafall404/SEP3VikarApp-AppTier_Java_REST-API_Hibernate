@@ -23,16 +23,20 @@ public class JobDbHandler {
 
     public void createJob(Job job,String username)
     {
+        System.out.println(username + "$$$%%^$%^*$&^$*^$^*%$%^*$%^*$*%^$*");
         Job j = job;
         j.setLocation(j.getLocation().toLowerCase());
         CriteriaBuilder cb = manager.getCriteriaBuilder();
         CriteriaQuery<User> cq = cb.createQuery(User.class);
         Root<User> root = cq.from(User.class);
         cq.select(root).where(cb.equal(root.get("username"), username));
+
         User res = manager.createQuery(cq).getSingleResult();
         res.addJob(j);
         manager.getTransaction().begin();
+        System.out.println(res.getUsername() + "$$$%%^$%^*$&^$*^$^*%$%^*$%^*$*%^$*");
         manager.persist(res);
+        System.out.println(j.getLocation() + "%%%%%%%%%");
         manager.persist(j);
         manager.getTransaction().commit();
         manager.close();

@@ -27,6 +27,11 @@ public class JobManager {
     @Consumes(MediaType.APPLICATION_JSON)
     public Boolean createJob(JobDTO dto)
     {
+        System.out.println("###############################" + dto.getUsername());
+        System.out.println("###############################" + dto.getDateTime());
+        System.out.println("###############################" + dto.getLocation());
+        System.out.println("###############################" + dto.getPrice());
+        System.out.println("###############################" + dto.getTitle());
         if(dto.getTitle()==null || dto.getDateTime()==null || dto.getLocation() ==null || dto.getPrice()<=0 || dto.getUsername()==null) {
            return false;
         }

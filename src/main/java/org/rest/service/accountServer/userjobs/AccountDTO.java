@@ -1,16 +1,19 @@
-package org.rest.service.accountServer.register;
+package org.rest.service.accountServer.userjobs;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import javax.persistence.OneToMany;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegisterDTO {
+public class AccountDTO {
+    private Long userId;
 
     @NonNull
     private String username;
@@ -25,7 +28,7 @@ public class RegisterDTO {
 
     @NonNull private String phone;
 
-    @NonNull private String repeatPassword;
+    private int postedJobsNo;
 
     @NonNull private Date birthDate;
 
