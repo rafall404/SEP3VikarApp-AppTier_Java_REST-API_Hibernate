@@ -1,4 +1,4 @@
-package org.rest.service.jobServer;
+package org.rest.service.jobServer.DTOs;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @RequiredArgsConstructor
 @Data
-public class JobDTO {
+public class NewJobDTO {
     @JsonProperty("id")
     private Long id;
 
@@ -24,7 +24,7 @@ public class JobDTO {
     private double price;
 
     @JsonProperty("dateTime")
-    private LocalDate dateTime;
+    private String dateTime;
 
     @JsonProperty("username")
     private String username;

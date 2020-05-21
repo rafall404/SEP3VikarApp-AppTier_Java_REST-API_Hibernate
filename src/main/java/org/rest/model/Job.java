@@ -6,6 +6,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,6 +31,6 @@ public class Job {
 
 	private double price;
 
-	@NonNull private LocalDate date;
+	@NonNull private LocalDateTime date;
 
 }

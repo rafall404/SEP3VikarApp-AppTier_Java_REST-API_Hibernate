@@ -1,6 +1,7 @@
 package org.dbAccess.dbHandlers;
 
 import org.rest.model.*;
+import org.rest.service.jobServer.DTOs.SearchJobsDTO;
 
 import javax.jws.soap.SOAPBinding;
 import javax.persistence.EntityManager;
@@ -34,27 +35,34 @@ public class JobDbHandler {
         User res = manager.createQuery(cq).getSingleResult();
         res.addJob(j);
         manager.getTransaction().begin();
-        System.out.println(res.getUsername() + "$$$%%^$%^*$&^$*^$^*%$%^*$%^*$*%^$*");
         manager.persist(res);
-        System.out.println(j.getLocation() + "%%%%%%%%%");
         manager.persist(j);
         manager.getTransaction().commit();
         manager.close();
     }
 
-    public List<Job> findJobs(String location, Long id){
-        List<Job> jobs;
+    public SearchJobsDTO findJobs(String location, Long id){
+        List<Job> sendJobs;
 
-        String queryString = "Select j from Job j where j.location = :location and j.id > :id ORDER BY j.id asc";
+        String queryString = "Select j from Job j where j.location = :location and j.id >= :id ORDER BY j.id asc";
         Query query = manager.createQuery(queryString);
         query.setParameter("location", location.toLowerCase());
         query.setParameter("id", id);
 
         query.setMaxResults(8);
 
-        jobs = query.getResultList();
+        sendJobs = query.getResultList();
+
+        queryString = "Select count(j) from Job j where j.location = :location";
+        query = manager.createQuery(queryString);
+        query.setParameter("location", location.toLowerCase());
+
+        Long totalJobs = (Long) query.getSingleResult();
+
         manager.close();
-        return jobs;
+
+        SearchJobsDTO dto = new SearchJobsDTO(sendJobs, totalJobs.intValue());
+        return dto;
     }
 
     public List<User> getApplicants(Long jobId){

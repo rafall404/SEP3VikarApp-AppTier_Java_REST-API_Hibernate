@@ -6,9 +6,13 @@ import org.rest.model.Job;
 import org.rest.model.User;
 import org.rest.service.jobServer.DTOs.AcceptApplicantsDTO;
 import org.rest.service.jobServer.DTOs.GetApplicantsDTO;
+import org.rest.service.jobServer.DTOs.NewJobDTO;
+import org.rest.service.jobServer.DTOs.SearchJobsDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Path("job")
@@ -25,7 +29,7 @@ public class JobManager {
     @POST
     @Path("/create")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Boolean createJob(JobDTO dto)
+    public Boolean createJob(NewJobDTO dto)
     {
         System.out.println("###############################" + dto.getUsername());
         System.out.println("###############################" + dto.getDateTime());
@@ -42,10 +46,13 @@ public class JobManager {
             Job job = new Job();
             job.setTitle(dto.getTitle());
             job.setPrice(dto.getPrice());
-            job.setDate(dto.getDateTime());
+            String date = dto.getDateTime();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+            LocalDateTime localDateTime = LocalDateTime.parse(date,formatter);
+            job.setDate(localDateTime);
             job.setDescription(dto.getDescription());
             job.setLocation(dto.getLocation());
-            job.setStatus("Available");
+            job.setStatus("open");
             jobDBHandler.createJob(job,dto.getUsername());
 
         return true;
@@ -54,8 +61,8 @@ public class JobManager {
 
     @GET
     @Path("/getJobs")
-    public List<Job> getJobs(@QueryParam("location") String location, @QueryParam("id") Long id){
-        return jobDBHandler.findJobs(location,id);
+    public SearchJobsDTO getJobs(@QueryParam("location") String location, @QueryParam("id") Long nextId){
+        return jobDBHandler.findJobs(location,nextId);
     }
 
     @GET
