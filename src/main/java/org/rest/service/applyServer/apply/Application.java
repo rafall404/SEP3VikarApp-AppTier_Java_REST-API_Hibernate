@@ -19,7 +19,7 @@ public class Application {
     @POST
     @Path("/newApplication")
     public Boolean applyFor(ApplyDTO applyDTO){
-        return applyHandler.applyForJob(applyDTO.getUserId(), applyDTO.getUserId());
+        return applyHandler.applyForJob(applyDTO.getUserId(), applyDTO.getJobId());
     }
 
 }

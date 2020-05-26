@@ -4,10 +4,7 @@ import org.dbAccess.HandlersFactory;
 import org.dbAccess.dbHandlers.JobDbHandler;
 import org.rest.model.Job;
 import org.rest.model.User;
-import org.rest.service.jobServer.DTOs.AcceptApplicantsDTO;
-import org.rest.service.jobServer.DTOs.GetApplicantsDTO;
-import org.rest.service.jobServer.DTOs.NewJobDTO;
-import org.rest.service.jobServer.DTOs.SearchJobsDTO;
+import org.rest.service.jobServer.DTOs.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -63,6 +60,15 @@ public class JobManager {
     @Path("/getJobs")
     public SearchJobsDTO getJobs(@QueryParam("location") String location, @QueryParam("id") Long nextId){
         return jobDBHandler.findJobs(location,nextId);
+    }
+
+    @GET
+    @Path("/getJobAndPoster")
+    public GetSpecificJobDTO getSpecificJob(@QueryParam("jobId") Long jobId)
+    {
+        System.out.println(jobDBHandler.getSpecificjobAndUserInfo(jobId));
+        return jobDBHandler.getSpecificjobAndUserInfo(jobId);
+
     }
 
     @GET

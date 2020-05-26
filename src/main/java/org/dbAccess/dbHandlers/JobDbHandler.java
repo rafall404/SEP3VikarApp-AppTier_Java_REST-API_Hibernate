@@ -1,12 +1,11 @@
 package org.dbAccess.dbHandlers;
 
 import org.rest.model.*;
+import org.rest.service.jobServer.DTOs.GetSpecificJobDTO;
 import org.rest.service.jobServer.DTOs.SearchJobsDTO;
 
-import javax.jws.soap.SOAPBinding;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -98,4 +97,40 @@ public class JobDbHandler {
         }
     }
 
+    public GetSpecificJobDTO getSpecificjobAndUserInfo(Long jobId) {
+
+        String stringQuery= "Select a from Job a where a.id = :jobId";
+        Query query = manager.createQuery(stringQuery);
+        query.setParameter("jobId", jobId);
+        Job job = (Job) query.getSingleResult();
+
+        stringQuery = "select u from User u ";
+        Query query1 = manager.createQuery(stringQuery);
+        List<User> users = query1.getResultList();
+        User returnUser = new User();
+
+        for(int i =0;  i<users.size(); i++)
+        {
+            User user  =users.get(i);
+            List<Job> jobs = user.getPostedJobs();
+            for(int a =0; a < jobs.size();a++)
+            {
+                if(jobs.get(a).getId().equals(jobId))
+                {
+                    returnUser = user;
+                }
+            }
+        }
+
+
+        GetSpecificJobDTO getSpecificJobDTO = new GetSpecificJobDTO(job.getId(),job.getTitle(),job.getStatus(),job.getDescription(),job.getLocation(),job.getPrice(),job.getDate(),returnUser.getId(),returnUser.getUsername(),returnUser.getFname(),returnUser.getLname(),returnUser.getEmailAddress(),returnUser.getTelephoneNumber());
+        System.out.println(job+ "&&&&&&&&&&&&&&&&&&&&&&&&");
+        System.out.println(returnUser+ "@#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        System.out.println(getSpecificJobDTO);
+        return getSpecificJobDTO;
+
+
+
+
+    }
 }

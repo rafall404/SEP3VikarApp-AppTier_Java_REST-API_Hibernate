@@ -18,6 +18,7 @@ public class ApplyDbHandler {
     }
 
     public Boolean applyForJob(Long userId, Long jobId){
+        System.out.println("#############################" + userId + "##################" + jobId);
         UserJobId userJobId = new UserJobId(userId, jobId);
 
         String stringQuery ="Select a from Apply a where a.id = :id";
