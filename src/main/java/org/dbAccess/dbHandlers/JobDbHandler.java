@@ -21,25 +21,6 @@ public class JobDbHandler {
         manager =  factory.createEntityManager();
     }
 
-    public void createJob(Job job,String username)
-    {
-        System.out.println(username + "$$$%%^$%^*$&^$*^$^*%$%^*$%^*$*%^$*");
-        Job j = job;
-        j.setLocation(j.getLocation().toLowerCase());
-        CriteriaBuilder cb = manager.getCriteriaBuilder();
-        CriteriaQuery<User> cq = cb.createQuery(User.class);
-        Root<User> root = cq.from(User.class);
-        cq.select(root).where(cb.equal(root.get("username"), username));
-
-        User res = manager.createQuery(cq).getSingleResult();
-        res.addJob(j);
-        manager.getTransaction().begin();
-        manager.persist(res);
-        manager.persist(j);
-        manager.getTransaction().commit();
-        manager.close();
-    }
-
     public SearchJobsDTO findJobs(String location, Long id){
         List<Job> sendJobs;
 
@@ -62,6 +43,24 @@ public class JobDbHandler {
 
         SearchJobsDTO dto = new SearchJobsDTO(sendJobs, totalJobs.intValue());
         return dto;
+    }
+
+    public void createJob(Job job,String username)
+    {
+        Job j = job;
+        j.setLocation(j.getLocation().toLowerCase());
+        CriteriaBuilder cb = manager.getCriteriaBuilder();
+        CriteriaQuery<User> cq = cb.createQuery(User.class);
+        Root<User> root = cq.from(User.class);
+        cq.select(root).where(cb.equal(root.get("username"), username));
+
+        User res = manager.createQuery(cq).getSingleResult();
+        res.addJob(j);
+        manager.getTransaction().begin();
+        manager.persist(res);
+        manager.persist(j);
+        manager.getTransaction().commit();
+        manager.close();
     }
 
     public List<User> getApplicants(Long jobId){
@@ -124,9 +123,6 @@ public class JobDbHandler {
 
 
         GetSpecificJobDTO getSpecificJobDTO = new GetSpecificJobDTO(job.getId(),job.getTitle(),job.getStatus(),job.getDescription(),job.getLocation(),job.getPrice(),job.getDate(),returnUser.getId(),returnUser.getUsername(),returnUser.getFname(),returnUser.getLname(),returnUser.getEmailAddress(),returnUser.getTelephoneNumber());
-        System.out.println(job+ "&&&&&&&&&&&&&&&&&&&&&&&&");
-        System.out.println(returnUser+ "@#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-        System.out.println(getSpecificJobDTO);
         return getSpecificJobDTO;
 
 

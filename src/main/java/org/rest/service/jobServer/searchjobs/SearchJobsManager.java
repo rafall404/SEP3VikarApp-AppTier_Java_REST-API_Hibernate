@@ -8,10 +8,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 
 @Path("job")
-public class SearchJobsmanager {
+public class SearchJobsManager {
     private JobDbHandler jobDBHandler;
 
-    public SearchJobsmanager()
+    public SearchJobsManager()
     {
         jobDBHandler = HandlersFactory.getInstance().getJobDb();
     }
