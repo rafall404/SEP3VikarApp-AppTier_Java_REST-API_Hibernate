@@ -1,5 +1,6 @@
 package org.rest.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -7,6 +8,7 @@ import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Apply {
 
@@ -14,11 +16,6 @@ public class Apply {
     private UserJobId id;
 
     boolean isAccepted;
-
-    public Apply(Long user, Long job, boolean accepted) {
-        id = new UserJobId(user, job);
-        isAccepted = accepted;
-    }
 
     public Apply(UserJobId userJobId){
         id=userJobId;
