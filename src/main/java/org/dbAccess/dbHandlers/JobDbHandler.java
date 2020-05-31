@@ -1,8 +1,8 @@
 package org.dbAccess.dbHandlers;
 
 import org.rest.model.*;
-import org.rest.service.jobServer.DTOs.GetSpecificJobDTO;
-import org.rest.service.jobServer.DTOs.SearchJobsDTO;
+import org.rest.service.jobServer.getSpecificJobWithPoster.GetSpecificJobDTO;
+import org.rest.service.jobServer.searchjobs.SearchJobsDTO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

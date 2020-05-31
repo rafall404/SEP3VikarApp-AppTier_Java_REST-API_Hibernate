@@ -1,9 +1,8 @@
-package org.rest.service.jobServer.DTOs;
+package org.rest.service.jobServer.createjobs;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import java.time.LocalDate;
 
 @RequiredArgsConstructor
 @Data

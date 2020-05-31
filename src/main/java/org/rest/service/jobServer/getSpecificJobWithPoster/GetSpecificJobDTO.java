@@ -1,4 +1,4 @@
-package org.rest.service.jobServer.DTOs;
+package org.rest.service.jobServer.getSpecificJobWithPoster;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

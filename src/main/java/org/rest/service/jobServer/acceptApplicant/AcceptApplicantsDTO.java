@@ -1,4 +1,4 @@
-package org.rest.service.jobServer.DTOs;
+package org.rest.service.jobServer.acceptApplicant;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

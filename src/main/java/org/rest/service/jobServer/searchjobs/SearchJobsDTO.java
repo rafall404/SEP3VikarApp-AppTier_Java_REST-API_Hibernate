@@ -1,4 +1,4 @@
-package org.rest.service.jobServer.DTOs;
+package org.rest.service.jobServer.searchjobs;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
