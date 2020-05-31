@@ -1,9 +1,6 @@
 package org.rest.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,7 +11,7 @@ import javax.persistence.Id;
 
 @Data
 @NoArgsConstructor
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Job {
 	@Id
