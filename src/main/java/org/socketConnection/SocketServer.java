@@ -33,8 +33,5 @@ public class SocketServer {
             System.out.println("Quitting...");
             serverSocket.close();
 
-        }
-
-
-
+    }
 }

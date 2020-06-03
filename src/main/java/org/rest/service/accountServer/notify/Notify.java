@@ -19,6 +19,6 @@ public class Notify {
     @GET
     @Path("/getNotification")
     public List<GetNotificationsDTO> getNotifications(@QueryParam("userId") Long userId){
-        return accountDbHandler.getUserNotifications(userId);
+        return accountDbHandler.getNotifications(userId);
     }
 }

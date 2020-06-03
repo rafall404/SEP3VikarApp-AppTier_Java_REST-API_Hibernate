@@ -1,6 +1,7 @@
 package org.dbAccess.dbHandlers;
 
 import org.rest.model.*;
+import org.rest.service.accountServer.notify.GetNotificationsDTO;
 import org.rest.service.accountServer.userjobs.AccountDTO;
 
 import javax.persistence.*;
@@ -18,8 +19,6 @@ public class AccountDbHandler {
     public Boolean checkIfExists(User user){
 
         try {
-
-
             CriteriaBuilder cb = manager.getCriteriaBuilder();
             CriteriaQuery<User> cq = cb.createQuery(User.class);
             Root<User> root = cq.from(User.class);
@@ -80,23 +79,14 @@ public class AccountDbHandler {
         manager.persist(user);
         manager.getTransaction().commit();
         manager.close();
-
-
-
     }
 
     public List<Job> getUserJobs(Long userId,Long Jobid)
     {
        List<Job> jobs= new ArrayList<>();
        List<Job> userJobs= new ArrayList<>();
-//
-//        CriteriaBuilder cb = manager.getCriteriaBuilder();
-//        CriteriaQuery<Job> cq = cb.createQuery(Job.class);
-//        Root<User> root = cq.from(User.class);
-
 
         String queryString = "Select u.postedJobs  from User u where u.id = :userId ";
-
 
         Query query = manager.createQuery(queryString);
        query.setParameter("userId", userId);
@@ -118,16 +108,17 @@ public class AccountDbHandler {
             }
             break;
         }
-
-
         return userJobs;
-
-
-
-
-//        Query query1 = manager.createNativeQuery("SELECT j from (SELECT u.postedJobs from user u where u.id = )");
-
     }
 
+    public List<GetNotificationsDTO> getNotifications(Long userId){
+        List<GetNotificationsDTO> list;
 
+        String queryString = "Select j.id, j.title, n.status from Job j join Notify n join User u where u.id = :userId";
+        Query query = manager.createQuery(queryString);
+        query.setParameter("userId", userId);
+
+        list = (List<GetNotificationsDTO>) query.getResultList();
+        return  list;
+    }
 }

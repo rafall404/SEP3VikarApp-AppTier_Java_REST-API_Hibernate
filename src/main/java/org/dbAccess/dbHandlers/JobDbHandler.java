@@ -121,12 +121,7 @@ public class JobDbHandler {
             }
         }
 
-
         GetSpecificJobDTO getSpecificJobDTO = new GetSpecificJobDTO(job.getId(),job.getTitle(),job.getStatus(),job.getDescription(),job.getLocation(),job.getPrice(),job.getDate(),returnUser.getId(),returnUser.getUsername(),returnUser.getFname(),returnUser.getLname(),returnUser.getEmailAddress(),returnUser.getTelephoneNumber());
         return getSpecificJobDTO;
-
-
-
-
     }
 }
