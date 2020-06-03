@@ -7,7 +7,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 
-@Path("Job")
+@Path("job")
 public class GetSpecificJobManager {
 
     private JobDbHandler jobDBHandler;
