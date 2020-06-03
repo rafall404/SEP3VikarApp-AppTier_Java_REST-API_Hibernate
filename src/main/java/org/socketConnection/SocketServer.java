@@ -1,37 +1,40 @@
 package org.socketConnection;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.time.LocalDate;
+import java.util.Date;
 
 public class SocketServer {
-    public static void main(String[] args){
-
-        try{
-            ServerSocket welcomeSocket = new ServerSocket(9898);
+    public static void main(String[] args) throws IOException {
 
 
-                Socket socket = welcomeSocket.accept();
-                ObjectInputStream inFromClient = new ObjectInputStream(socket.getInputStream());
-                ObjectOutputStream outToClient = new ObjectOutputStream(socket.getOutputStream());
+        ServerSocket serverSocket = new ServerSocket(9898);
 
-                outToClient.writeObject("You have been connected to the App tier... You may now begin to Consume RestFul Web Services... Congratulations!!!");
-                String connection = (String) inFromClient.readObject();
-                if(!connection.equals(null))
-                {
-                    System.out.println("Presentation Tier has been Connected");
-                    System.out.println("Terminated Connection");
-                }
+            System.out.println("Listening on port 9898 "
+                    + "Press enter to quit "
+                    + "after the next connection.");
+            Socket socket = serverSocket.accept();
+            System.out.println("A client has connected.");
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            String response = in.readLine();
+        System.out.println(response);
+        PrintWriter out =
+                new PrintWriter(socket.getOutputStream(),
+                        true);
+        out.print("You have connected to Server" + LocalDate.now());
+        out.flush();
+        in.close();
+        out.close();
+            socket.close();
 
-                inFromClient.close();
-                outToClient.close();
-                socket.close();
 
+            System.out.println("Quitting...");
+            serverSocket.close();
 
-        }catch(IOException | ClassNotFoundException e){
-            e.printStackTrace();
         }
-    }
+
+
+
 }
